@@ -1,100 +1,147 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="glossy">
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-          icon="menu"
-        />
+  <div v-if="!$auth.loading">
+    <q-layout view="lHh Lpr lFf">
+      <q-header elevated>
+        <q-toolbar>
+          <q-btn
+            flat
+            dense
+            round
+            @click="leftDrawerOpen = !leftDrawerOpen"
+            aria-label="Menu"
+            icon="menu"
+            v-if="$auth.isAuthenticated"
+          />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+          <q-toolbar-title>
+            School App
+          </q-toolbar-title>
+          <q-btn stretch flat v-if="!$auth.isAuthenticated" @click="login" label='login' />
+          <q-btn stretch flat v-else @click="logout" label='Déconnexion' />
+        </q-toolbar>
+      </q-header>
 
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
+      <q-drawer
+        v-model="leftDrawerOpen"
+        show-if-above
+        bordered
+        content-class="bg-grey-2"
+        v-if="$auth.isAuthenticated"
+      >
+        <q-list>
+          <q-item-label header>Menu</q-item-label>
+          <q-item
+            v-for="(item, index) in items"
+            :key="index"
+            clickable
+            tag="a"
+            target="_blank"
+            :href="item.href"
+          >
+            <q-item-section avatar>
+              <q-icon :name="item.avatar" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{item.label}}</q-item-label>
+              <q-item-label caption>{{item.caption}}</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-expansion-item
+            v-if="$auth.isAuthenticated"
+          >
+            <template v-slot:header>
+              <q-item-section avatar>
+                <q-avatar>
+                  <q-img :src="$auth.user.picture"
+                    spinner-color="white"
+                    width="50px"
+                    style="border-radius: 50%;"
+                  />
+                </q-avatar>
+              </q-item-section>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-2"
-    >
-      <q-list>
-        <q-item-label header>Essential Links</q-item-label>
-        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="school" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Docs</q-item-label>
-            <q-item-label caption>quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/">
-          <q-item-section avatar>
-            <q-icon name="code" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Github</q-item-label>
-            <q-item-label caption>github.com/quasarframework</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://chat.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="chat" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Discord Chat Channel</q-item-label>
-            <q-item-label caption>chat.quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://forum.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="forum" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Forum</q-item-label>
-            <q-item-label caption>forum.quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://twitter.com/quasarframework">
-          <q-item-section avatar>
-            <q-icon name="rss_feed" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Twitter</q-item-label>
-            <q-item-label caption>@quasarframework</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
+              <q-item-section>
+                User
+              </q-item-section>
+            </template>
 
-    <q-page-container>
-      <HelloWorld />
-    </q-page-container>
-  </q-layout>
+            <q-card>
+              <q-card-section>
+                <q-list>
+                  <q-item
+                    clickable
+                    @click="logout"
+                  >
+                    <q-item-label>Déconnexion</q-item-label>
+                  </q-item>
+                <q-item
+                  clickable
+                  tag="a"
+                  target="_blank"
+                  href="/settings"
+                  >
+                    <q-item-label>Paramètres</q-item-label>
+                  </q-item>
+                </q-list>
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+        </q-list>
+      </q-drawer>
+
+      <q-page-container>
+        <Home />
+      </q-page-container>
+    </q-layout>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import Home from './views/Home.vue';
 
 export default {
   name: 'LayoutDefault',
 
   components: {
-    HelloWorld,
+    Home,
   },
 
   data() {
     return {
       leftDrawerOpen: false,
+      items: [
+        {
+          label: 'docs',
+          caption: 'docs',
+          href: 'https://quasar.dev/',
+          avatar: 'school',
+        },
+        {
+          label: 'Github',
+          caption: 'github.com/quasarframework',
+          href: 'https://github.com/quasarframework/',
+          avatar: 'code',
+        },
+        {
+          label: 'docs',
+          caption: 'docs',
+          href: 'https://quasar.dev/',
+          avatar: 'code',
+        },
+      ],
     };
+  },
+  methods: {
+    // Log the user in
+    login() {
+      this.$auth.loginWithRedirect();
+    },
+    // Log the user out
+    logout() {
+      this.$auth.logout({
+        returnTo: window.location.origin,
+      });
+    },
   },
 };
 </script>
