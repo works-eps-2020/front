@@ -1,9 +1,10 @@
 import Vue from 'vue';
-import App from './App.vue';
-import './registerServiceWorker';
-import router from './router';
-import store from './store';
-import './quasar';
+import App from '@/App.vue';
+import '@/registerServiceWorker';
+import router from '@/router';
+import store from '@/store';
+import '@/quasar';
+import i18n from '@/i18n'
 
 // Import the Auth0 configuration
 import { domain, clientId } from '../auth_config.js';
@@ -27,6 +28,7 @@ Vue.use(Auth0Plugin, {
 Vue.config.productionTip = false;
 
 new Vue({
+  i18n,
   router,
   store,
   render: (h) => h(App),

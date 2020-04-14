@@ -16,8 +16,8 @@
           <q-toolbar-title>
             School App
           </q-toolbar-title>
-          <q-btn stretch flat v-if="!$auth.isAuthenticated" @click="login" label='login' />
-          <q-btn stretch flat v-else @click="logout" label='Déconnexion' />
+          <q-btn stretch flat v-if="!$auth.isAuthenticated" @click="login" :label="this.$t('login')" />
+          <q-btn stretch flat v-else @click="logout" :label="this.$t('logout')" />
         </q-toolbar>
       </q-header>
 
@@ -61,7 +61,7 @@
               </q-item-section>
 
               <q-item-section>
-                User
+                {{$t('firstname')}}
               </q-item-section>
             </template>
 
@@ -72,7 +72,7 @@
                     clickable
                     @click="logout"
                   >
-                    <q-item-label>Déconnexion</q-item-label>
+                    <q-item-label>{{$t('logout')}}</q-item-label>
                   </q-item>
                 <q-item
                   clickable
@@ -80,7 +80,7 @@
                   target="_blank"
                   href="/settings"
                   >
-                    <q-item-label>Paramètres</q-item-label>
+                    <q-item-label>{{$tc('setting', 2)}}</q-item-label>
                   </q-item>
                 </q-list>
               </q-card-section>

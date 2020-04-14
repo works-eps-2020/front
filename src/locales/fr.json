@@ -1,0 +1,84 @@
+{
+  "setting": "Paramètre | Paramètres",
+  "logout": "Déconnexion",
+  "login": "Connexion",
+  "research": "Rechercher",
+  "likes": "J'aimes",
+  "view": "Afficher le | Afficher les",
+  "comment": "Commentaire | Commentaires",
+  "ago": "Il y a {duration}",
+  "day": "jour | jours",
+  "month": "Mois | Mois",
+  "hour": "Heure | Heures",
+  "minute": "Minute | Minutes",
+  "add-comment": "Ajouter un commentaire",
+  "january": "Janvier",
+  "february": "Février",
+  "march": "Mars",
+  "april": "Avril",
+  "may": "Mai",
+  "june": "Juin",
+  "july": "Juillet",
+  "august": "Août",
+  "september": "Septembre",
+  "october": "Octobre",
+  "november": "Novembre",
+  "december": "Décembre",
+  "bookmarked-msg": "Post sauvergadé",
+  "skip": "Passer",
+  "finish": "Finir",
+  "security": "Sécurité",
+  "post": "Post | Posts",
+  "create_post": "Créer une publication",
+  "save": "Sauvegarder",
+  "follow": "Suivre",
+  "unfollow": "Ne plus suivre",
+  "follower": "Abonné | Abonnés",
+  "following": "Abonnement | Abonnements",
+  "email": "Adresse Mail",
+  "firstname": "Prénom",
+  "lastname": "Nom",
+  "tagname": "Tag Name",
+  "profile_picture": "Photo de profil",
+  "description": "Description",
+  "hashtag": "Hashtag | Hashtags",
+  "unknown_user": "Utilisateur inconnu",
+  "not_explicit": "La photo est pas explicite",
+  "server_error": "Le serveur a rencontré une erreur",
+  "publish": "Publier",
+  "save_settings": {
+    "server_error": "Erreur durant la sauvegarde",
+    "creation": "Sauvegarde des paramètre"
+  },
+  "new_post": {
+    "title": "Nouvelle publication",
+    "creation": "Création de la publication",
+    "choose_a_file": "Choisir une image",
+    "placeholder_description": "Dites ce que vous avez à dire",
+    "error": {
+      "no_image_selected": "Veuillez sélectionner une image",
+      "bad_file_type": "Veuillez sélectionner une image valide",
+      "bad_description": "Veuillez ajouter une description d'au moins 5 caractères"
+    }
+  },
+  "onboarding": {
+    "security": [
+      "Sécurité à tous les niveaux",
+      "Nous ne gardons pas vos photos"
+    ],
+    "post": [
+      "Postez vos photos en toutes simplicité",
+      "Vos abonnés seront tous au courant",
+      "Profitez des posts de vos abonnements"
+    ],
+    "comment": [
+      "Faites part de vos impressions à vos abonnements",
+      "Profitez de l'avis de vos abonnés"
+    ],
+    "hashtag": [
+      "Ajoutez des hastags à vos publications",
+      "Cherchez les hastags que vous aimé avec aisance"
+    ]
+  }
+}
+  
