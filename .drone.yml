@@ -30,9 +30,10 @@ steps:
       password:
         from_secret: GITHUB_TOKEN
       tags:
-        - latest
-    # when:
-    #   event: tag
+        - latest  
+    when:
+      branch:
+      - master
     depends_on: [build]
   - name: deploy
     image: pabloclsn/kubectl-docker:latest
@@ -43,6 +44,7 @@ steps:
     environment:
       KUBE_CONFIG:
         from_secret: KUBE_CONFIG
-    # when:
-    #   event: tag
     depends_on: [docker]
+    when:
+      branch:
+      - master
