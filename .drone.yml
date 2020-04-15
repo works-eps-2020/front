@@ -32,14 +32,14 @@ steps:
       tags:
         - ${DRONE_TAG}
         - latest
-    when:
-      event: tag
+    # when:
+    #   event: tag
     depends_on: [build]
   - name: deploy
     image: pabloclsn/kubectl-docker:latest
     commands:
+      - touch ~/.kube/config
       - echo $KUBE_CONFIG > ~/.kube/config
-      - cat .kube/deployment.yaml | envsubst | kubectl apply -f -
       - kubectl rollout restart deployment/front-deployment -n prod-mspr-ci
     environment:
       KUBE_CONFIG:
