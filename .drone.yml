@@ -24,13 +24,12 @@ steps:
       email: colson.pablo@icloud.com
       dockerfile: ./Dockerfile
       registry: docker.pkg.github.com
-      repo: works-eps-2020/front
+      repo: works-eps-2020/front/front
       username:
         from_secret: GITHUB_USERNAME
       password:
         from_secret: GITHUB_TOKEN
       tags:
-        - ${DRONE_TAG}
         - latest
     # when:
     #   event: tag
