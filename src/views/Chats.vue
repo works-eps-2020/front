@@ -8,6 +8,7 @@
         clickable
         v-ripple
         :to="`/chat/${chat.id}`"
+        class="rounded-borders"
       >
         <q-item-section avatar>
           <q-img

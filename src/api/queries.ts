@@ -28,20 +28,17 @@ export const queries = {
         content
         created_at
         id
-        status
         user {
-          auth0_id
           firstname
           lastname
           displayname
           email
         }
       }
-      chat_users(where: {user: {auth0_id: {_neq: $id}}}) {
+      chat_users(where: {user: {id: {_neq: $id}}}) {
         user {
           displayname
           logo_url
-          auth0_id
           firstname
           email
           lastname

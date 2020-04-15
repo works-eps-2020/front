@@ -34,7 +34,13 @@
       >
         <q-list>
           <q-item-label header>Menu</q-item-label>
-          <q-item v-for="(item, index) in items" :key="index" clickable tag="a" :to="item.to">
+          <q-item
+            v-for="(item, index) in items"
+            :key="index"
+            clickable
+            tag="a"
+            :to="item.to"
+          >
             <q-item-section avatar>
               <q-icon :name="item.avatar" />
             </q-item-section>
@@ -83,8 +89,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { ACTIONS } from "./store/actions-definitions";
+import { mapActions, mapState } from 'vuex';
+import { ACTIONS } from './store/actions-definitions'
 
 export default {
   name: "LayoutDefault",
@@ -119,9 +125,11 @@ export default {
       ],
     };
   },
-  async mounted() {
-    await this[ACTIONS.SET_TOKEN]();
-    this[ACTIONS.SET_CHATS]({ id: this.$auth.user.sub });
+  mounted() {
+    this[ACTIONS.SET_TOKEN]()
+  },
+  computed: {
+    ...mapState(['token'])
   },
   methods: {
     ...mapActions([ACTIONS.SET_TOKEN, ACTIONS.SET_CHATS]),
@@ -134,6 +142,11 @@ export default {
       this.$auth.logout({
         returnTo: window.location.origin
       });
+    }
+  },
+  watch: {
+    token(newValue) {
+      this[ACTIONS.SET_CHATS]({id: this.$auth.user.sub})
     }
   }
 };

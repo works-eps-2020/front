@@ -13,7 +13,6 @@ export const fetcher = (token: string, query: string, variables?: any) => fetch(
 });
 
 export const fetchAsync = async (token: string, fetcher: any, query: string, variables?: any) => {
-  console.log('variable,', variables)
   const response = await fetcher(token, query, variables);
   if (!response.ok) {
     throw response;
