@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import VueI18n from 'vue-i18n';
+import VueI18n, { LocaleMessages } from 'vue-i18n';
 
 Vue.use(VueI18n);
 
@@ -9,7 +9,7 @@ function loadLocaleMessages() {
     true,
     /[A-Za-z0-9-_,\s]+\.json$/i,
   );
-  const messages = {};
+  const messages: LocaleMessages = {};
   locales.keys().forEach((key) => {
     const matched = key.match(/([A-Za-z0-9-_]+)\./i);
     if (matched && matched.length > 1) {
