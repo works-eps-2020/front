@@ -11,7 +11,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import HomeLogin from '@/components/HomeLogin.vue';
 import HomeLogged from '@/components/HomeLogged.vue';
 

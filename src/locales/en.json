@@ -1,5 +1,9 @@
 {
   "setting": "Setting | Settings",
+  "home": "Home",
+  "chat": "Chat | Chats",
+  "message": "Message | Messages",
+  "send_messages": "Send messages",
   "logout": "Logout",
   "login": "Login",
   "research": "Research",

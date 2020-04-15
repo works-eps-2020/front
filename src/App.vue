@@ -16,7 +16,13 @@
           <q-toolbar-title>
             School App
           </q-toolbar-title>
-          <q-btn stretch flat v-if="!$auth.isAuthenticated" @click="login" :label="this.$t('login')" />
+          <q-btn
+            stretch
+            flat
+            v-if="!$auth.isAuthenticated"
+            @click="login"
+            :label="this.$t('login')"
+          />
           <q-btn stretch flat v-else @click="logout" :label="this.$t('logout')" />
         </q-toolbar>
       </q-header>
@@ -35,7 +41,6 @@
             :key="index"
             clickable
             tag="a"
-            target="_blank"
             :href="item.href"
           >
             <q-item-section avatar>
@@ -46,6 +51,7 @@
               <q-item-label caption>{{item.caption}}</q-item-label>
             </q-item-section>
           </q-item>
+          <div></div>
           <q-expansion-item
             v-if="$auth.isAuthenticated"
           >
@@ -90,48 +96,43 @@
       </q-drawer>
 
       <q-page-container>
-        <Home />
+        <router-view :key="$route.fullPath"/>
       </q-page-container>
     </q-layout>
   </div>
 </template>
 
 <script>
-import Home from './views/Home.vue';
+import { mapActions } from 'vuex';
+import { ACTIONS } from './store/actions-definitions'
+import { getInstance } from "@/auth0";
 
 export default {
   name: 'LayoutDefault',
-
-  components: {
-    Home,
-  },
-
   data() {
     return {
       leftDrawerOpen: false,
       items: [
         {
-          label: 'docs',
-          caption: 'docs',
-          href: 'https://quasar.dev/',
-          avatar: 'school',
+          label: this.$t('home'),
+          caption: '',
+          href: '/',
+          avatar: 'home',
         },
         {
-          label: 'Github',
-          caption: 'github.com/quasarframework',
-          href: 'https://github.com/quasarframework/',
-          avatar: 'code',
-        },
-        {
-          label: 'docs',
-          caption: 'docs',
-          href: 'https://quasar.dev/',
-          avatar: 'code',
+          label: this.$tc('chat', 1),
+          caption: this.$t('send_messages'),
+          href: '/messages',
+          avatar: 'message',
         },
       ],
     };
   },
+  mounted() {
+    this[ACTIONS.SET_TOKEN]();
+  },
   methods: {
+    ...mapActions([ACTIONS.SET_TOKEN]),
     // Log the user in
     login() {
       this.$auth.loginWithRedirect();
@@ -141,7 +142,7 @@ export default {
       this.$auth.logout({
         returnTo: window.location.origin,
       });
-    },
+    }
   },
 };
 </script>

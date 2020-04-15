@@ -1,7 +1,11 @@
 {
   "setting": "Paramètre | Paramètres",
+  "home": "Accueil",
   "logout": "Déconnexion",
   "login": "Connexion",
+  "chat": "Conversation | Conversations",
+  "message": "Message | Messages",
+  "send_messages": "Envoyer des messages",
   "research": "Rechercher",
   "likes": "J'aimes",
   "view": "Afficher le | Afficher les",

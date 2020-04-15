@@ -1,3 +1,5 @@
 export const ACTIONS = {
-    SET_PROFILE:'setProfile'
-}
+  SET_PROFILE: 'setProfile',
+  SET_CHATS: 'setChats',
+  SET_TOKEN: 'setToken',
+};
