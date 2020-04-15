@@ -1,0 +1,48 @@
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+  - name: install_dependencies
+    image: node:12
+    commands:
+      - npm ci
+  - name: lint
+    image: node:12
+    commands:
+      - npm run lint
+    depends_on: [install_dependencies]
+  - name: build
+    image: node:12
+    commands:
+      -  npm run build
+    depends_on: [lint]
+  - name: docker
+    image: banzaicloud/drone-kaniko
+    settings:
+      email: colson.pablo@icloud.com
+      dockerfile: ./Dockerfile
+      registry: docker.pkg.github.com
+      repo: works-eps-2020/front
+      username:
+        from_secret: GITHUB_USERNAME
+      password:
+        from_secret: GITHUB_TOKEN
+      tags:
+        - ${DRONE_TAG}
+        - latest
+    when:
+      event: tag
+    depends_on: [build]
+  - name: deploy
+    image: pabloclsn/kubectl-docker:latest
+    commands:
+      - echo $KUBE_CONFIG > ~/.kube/config
+      - cat .kube/deployment.yaml | envsubst | kubectl apply -f -
+      - kubectl rollout restart deployment/front-deployment -n prod-mspr-ci
+    environment:
+      KUBE_CONFIG:
+        from_secret: KUBE_CONFIG
+    when:
+      event: tag
+    depends_on: [docker]
