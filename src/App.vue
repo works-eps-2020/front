@@ -41,7 +41,7 @@
             :key="index"
             clickable
             tag="a"
-            :href="item.href"
+            :to="item.to"
           >
             <q-item-section avatar>
               <q-icon :name="item.avatar" />
@@ -105,7 +105,6 @@
 <script>
 import { mapActions } from 'vuex';
 import { ACTIONS } from './store/actions-definitions'
-import { getInstance } from "@/auth0";
 
 export default {
   name: 'LayoutDefault',
@@ -116,23 +115,24 @@ export default {
         {
           label: this.$t('home'),
           caption: '',
-          href: '/',
+          to: '/home',
           avatar: 'home',
         },
         {
           label: this.$tc('chat', 1),
           caption: this.$t('send_messages'),
-          href: '/messages',
+          to: '/chats',
           avatar: 'message',
         },
       ],
     };
   },
-  mounted() {
-    this[ACTIONS.SET_TOKEN]();
+  async mounted() {
+    await this[ACTIONS.SET_TOKEN]();
+    this[ACTIONS.SET_CHATS]({id: this.$auth.user.sub})
   },
   methods: {
-    ...mapActions([ACTIONS.SET_TOKEN]),
+    ...mapActions([ACTIONS.SET_TOKEN, ACTIONS.SET_CHATS]),
     // Log the user in
     login() {
       this.$auth.loginWithRedirect();
