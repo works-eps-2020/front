@@ -29,8 +29,13 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/organizations/:id',
-    name: 'organizations',
+    name: 'organization',
     component: () => import(/* webpackChunkName: "organization" */ '../views/Organization.vue'),
+  },
+  {
+    path: '/organizations',
+    name: 'organizations',
+    component: () => import(/* webpackChunkName: "organization" */ '../views/Organizations.vue'),
   },
   {
     path: '/',

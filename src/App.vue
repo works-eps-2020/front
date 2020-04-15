@@ -49,6 +49,18 @@
               <q-item-label caption>{{ item.caption }}</q-item-label>
             </q-item-section>
           </q-item>
+          <q-item
+            clickable
+            to="/organizations"
+          >
+            <q-item-section avatar>
+              <q-icon name="business_center" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Organisations</q-item-label>
+              <q-item-label caption>Gestion organisation</q-item-label>
+            </q-item-section>
+          </q-item>
           <q-expansion-item v-if="$auth.isAuthenticated">
             <template v-slot:header>
               <q-item-section avatar>
