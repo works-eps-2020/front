@@ -8,13 +8,9 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
-    redirect: "/home"
-  },
-  {
-    path: "/home",
-    name: "Home",
-    component: Home
+    path: '/home',
+    name: 'Home',
+    component: Home,
   },
   {
     path: "/chats",
@@ -25,7 +21,16 @@ const routes: Array<RouteConfig> = [
     path: "/level",
     name: "Cours",
     component: Level
-  }
+  },
+  {
+    path: '/organizations/:id',
+    name: 'organizations',
+    component: () => import(/* webpackChunkName: "organization" */ '../views/Organization.vue'),
+  },
+  {
+    path: '/',
+    redirect: 'Home',
+  },
 ];
 
 const router = new VueRouter({
