@@ -39,7 +39,7 @@ steps:
     commands:
       - touch ~/.kube/config
       - echo $KUBE_CONFIG > ~/.kube/config
-      - kubectl rollout restart deployment/front-deployment -n prod-mspr-ci
+      - kubectl rollout restart deployment/front-deployment -n prod-workshop-auchan
     environment:
       KUBE_CONFIG:
         from_secret: KUBE_CONFIG
