@@ -104,6 +104,39 @@ export default new Vuex.Store<State>({
       if(context.state.token)
         return fetchAsync(context.state.token, fetcher, mutations.INSERT_MESSAGE, payload)
     },
+    [ACTIONS.RETRIEVE_LEVELS](context: any) {
+      if (context.state.token) {
+        fetchAsync(context.state.token, fetcher, queries.levels, {}).then(responsePayload => {
+          if (responsePayload.data) {
+            const levels: Level[] = responsePayload.data.level.map((level: any) => {
+              return {
+                id: level.id,
+                name: level.name,
+                topicCount: level.topics_aggregate.aggregate.count
+              };
+            });
+            context.commit(MUTATIONS.MUTATE_LEVEL, levels);
+          }
+        });
+      }
+    },
+    [ACTIONS.CREATE_LEVEL](context: any, name: string) {
+      if (context.state.token) {
+        fetchAsync(context.state.token, fetcher, mutations.CREATE_LEVEL, {
+          name
+        }).then(responsePayload => {
+          if (responsePayload.data) {
+            const newLevel = {
+              id: responsePayload.data.insert_level.returning[0].id,
+              name: responsePayload.data.insert_level.returning[0].name,
+              topicCount: 0
+            };
+            context.state.levels.push(newLevel);
+            context.commit(MUTATIONS.MUTATE_LEVEL, context.state.levels);
+          }
+        });
+      }
+    },
     [ACTIONS.DELETE_LEVEL](context: any, id: string) {
       if (context.state.token) {
         fetchAsync(context.state.token, fetcher, mutations.DELETE_LEVEL, {
