@@ -43,18 +43,6 @@
               <q-item-label caption>{{ item.caption }}</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item
-            clickable
-            to="/organizations"
-          >
-            <q-item-section avatar>
-              <q-icon name="business_center" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>Organisations</q-item-label>
-              <q-item-label caption>Gestion organisation</q-item-label>
-            </q-item-section>
-          </q-item>
           <q-expansion-item v-if="$auth.isAuthenticated">
             <template v-slot:header>
               <q-item-section avatar>
@@ -121,8 +109,14 @@ export default {
           caption: this.$t("level_management"),
           to: "/level",
           avatar: "level"
-        }
-      ]
+        },
+        {
+          label: this.$tc('organization', 0),
+          caption: this.$tc('organization', 0),
+          to: '/organizations',
+          avatar: 'business_center',
+        },
+      ],
     };
   },
   async mounted() {
