@@ -67,13 +67,15 @@ export default {
   methods: {
     createLevel() {
       this.submitting = true;
-      //TODO: Submit create lesson to hasura
-      this.lessonName = "";
-      this.submitting = false;
+      store.dispatch(ACTIONS.CREATE_LEVEL, this.lessonName).then(() => {
+        this.lessonName = "";
+        this.submitting = false;
+      });
     },
     deleteLevel(id) {
-      //TODO: Submit delete lesson to hasura
-      this.levels = this.levels.filter(item => item.id !== id);
+      store.dispatch(ACTIONS.DELETE_LEVEL, id).then(() => {
+        this.levels = this.levels.filter(item => item.id !== id);
+      });
     }
   }
 };

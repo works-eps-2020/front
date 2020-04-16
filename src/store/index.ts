@@ -8,6 +8,7 @@ import { MUTATIONS } from "./mutations-definitions";
 import { ACTIONS } from "./actions-definitions";
 import { Level } from "@/types/Level";
 import { queries } from "@/api/queries";
+import { mutations } from "@/api/mutations";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getInstance } = require("@/auth0");
 
@@ -21,6 +22,11 @@ export default new Vuex.Store<State>({
     },
     [MUTATIONS.SET_TOKEN]: (state, token: string) => {
       state.token = token;
+    },
+    [MUTATIONS.MUTATE_LEVEL]: (state, levels: Level[]) => {
+      if (levels) {
+        state.levels = levels;
+      }
     }
   },
   actions: {
@@ -42,8 +48,8 @@ export default new Vuex.Store<State>({
             instance
               .getTokenSilently()
               .then((token: any) => {
-                context.commit(MUTATIONS.SET_TOKEN, token);
-                resolve(token);
+                context.commit(MUTATIONS.SET_TOKEN, token.__raw);
+                resolve(token.__raw);
               })
               .catch((error: any) => {
                 reject(error);
@@ -63,9 +69,26 @@ export default new Vuex.Store<State>({
                 topicCount: level.topics_aggregate.aggregate.count
               };
             });
-            console.log(levels ? levels : responsePayload);
             context.commit(ACTIONS.RETRIEVE_LEVELS, levels);
           }
+        });
+      }
+    },
+    [ACTIONS.CREATE_LEVEL](context: any, name: string) {
+      if (context.state.token) {
+        fetchAsync(context.state.token, fetcher, mutations.CREATE_LEVEL, {
+          name
+        }).then(() => {
+          context.commit(MUTATIONS.MUTATE_LEVEL);
+        });
+      }
+    },
+    [ACTIONS.DELETE_LEVEL](context: any, id: string) {
+      if (context.state.token) {
+        fetchAsync(context.state.token, fetcher, mutations.DELETE_LEVEL, {
+          id
+        }).then(() => {
+          context.commit(MUTATIONS.MUTATE_LEVEL);
         });
       }
     }
