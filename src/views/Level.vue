@@ -28,12 +28,14 @@
       <thead>
         <tr>
           <th class="text-left">{{ $t("name") }}</th>
+          <th class="text-left">{{ $t("linked_topic") }}</th>
           <th class="text-left">{{ $t("delete") }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="level in levels" class="user" :key="level['.id']">
+        <tr v-for="level in levels" class="user" :key="level['id']">
           <td class="text-left">{{ level.name }}</td>
+          <td class="text-left">{{ level.topicCount }}</td>
           <td class="text-left">
             <q-btn round color="brown-5" icon="delete" @click="deleteLevel(level.id)" />
           </td>
@@ -50,7 +52,7 @@ import { ACTIONS } from "@/store/actions-definitions";
 
 export default {
   name: "Level",
-  data: function() {
+  data() {
     return {
       lessonName: "",
       submitting: false
@@ -60,9 +62,7 @@ export default {
     store.dispatch(ACTIONS.RETRIEVE_LEVELS);
   },
   computed: {
-    ...mapState({
-      levels: state => state.levels
-    })
+    ...mapState(["levels"])
   },
   methods: {
     createLevel() {
@@ -73,9 +73,7 @@ export default {
       });
     },
     deleteLevel(id) {
-      store.dispatch(ACTIONS.DELETE_LEVEL, id).then(() => {
-        this.levels = this.levels.filter(item => item.id !== id);
-      });
+      store.dispatch(ACTIONS.DELETE_LEVEL, id);
     }
   }
 };

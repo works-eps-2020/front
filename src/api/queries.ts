@@ -14,7 +14,7 @@ export const queries = {
       name
       topics_aggregate {
         aggregate {
-          count(distinct: true)
+          count
         }
       }
     }

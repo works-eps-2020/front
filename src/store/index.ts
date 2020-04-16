@@ -15,7 +15,10 @@ const { getInstance } = require("@/auth0");
 Vue.use(Vuex);
 
 export default new Vuex.Store<State>({
-  state: {},
+  state: {
+    token: "",
+    levels: []
+  },
   mutations: {
     [MUTATIONS.SET_PROFILE]: (state, payload: Profile) => {
       state.profile = payload;
@@ -24,9 +27,7 @@ export default new Vuex.Store<State>({
       state.token = token;
     },
     [MUTATIONS.MUTATE_LEVEL]: (state, levels: Level[]) => {
-      if (levels) {
-        state.levels = levels;
-      }
+      state.levels = levels;
     }
   },
   actions: {
@@ -46,7 +47,7 @@ export default new Vuex.Store<State>({
         instance.$watch("loading", (loading: any) => {
           if (loading === false && instance.isAuthenticated) {
             instance
-              .getTokenSilently()
+              .getIdTokenClaims()
               .then((token: any) => {
                 context.commit(MUTATIONS.SET_TOKEN, token.__raw);
                 resolve(token.__raw);
@@ -69,7 +70,7 @@ export default new Vuex.Store<State>({
                 topicCount: level.topics_aggregate.aggregate.count
               };
             });
-            context.commit(ACTIONS.RETRIEVE_LEVELS, levels);
+            context.commit(MUTATIONS.MUTATE_LEVEL, levels);
           }
         });
       }
@@ -78,8 +79,16 @@ export default new Vuex.Store<State>({
       if (context.state.token) {
         fetchAsync(context.state.token, fetcher, mutations.CREATE_LEVEL, {
           name
-        }).then(() => {
-          context.commit(MUTATIONS.MUTATE_LEVEL);
+        }).then(responsePayload => {
+          if (responsePayload.data) {
+            const newLevel = {
+              id: responsePayload.data.insert_level.returning[0].id,
+              name: responsePayload.data.insert_level.returning[0].name,
+              topicCount: 0
+            };
+            context.state.levels.push(newLevel);
+            context.commit(MUTATIONS.MUTATE_LEVEL, context.state.levels);
+          }
         });
       }
     },
@@ -88,7 +97,10 @@ export default new Vuex.Store<State>({
         fetchAsync(context.state.token, fetcher, mutations.DELETE_LEVEL, {
           id
         }).then(() => {
-          context.commit(MUTATIONS.MUTATE_LEVEL);
+          context.commit(
+            MUTATIONS.MUTATE_LEVEL,
+            context.state.levels.filter((level: Level) => level.id !== id)
+          );
         });
       }
     }

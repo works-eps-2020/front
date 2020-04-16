@@ -3,11 +3,12 @@ export const mutations = {
     insert_level(objects: {name: $name}) {
       returning {
         id
+        name
       }
     }
   }
   `,
-  DELETE_LEVEL: `mutation ($id: String!) {
+  DELETE_LEVEL: `mutation ($id: uuid!) {
     delete_level(where: {id: {_eq: $id}}) {
       returning {
         id
