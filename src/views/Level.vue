@@ -44,17 +44,25 @@
 </template>
 
 <script>
+import store from "@/store";
+import { mapState } from "vuex";
+import { ACTIONS } from "@/store/actions-definitions";
+
 export default {
   name: "Level",
   data: function() {
     return {
-      levels: [
-        { id: "000", name: "Terminale" },
-        { id: "001", name: "CM2" }
-      ],
       lessonName: "",
       submitting: false
     };
+  },
+  mounted() {
+    store.dispatch(ACTIONS.RETRIEVE_LEVELS);
+  },
+  computed: {
+    ...mapState({
+      levels: state => state.levels
+    })
   },
   methods: {
     createLevel() {
