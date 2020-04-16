@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import organisationsDataTable from '@/components/OrganisationsTable'
-import formOrganization from '@/components/FormOrganization'
+import organisationsDataTable from '@/components/OrganisationsTable.vue'
+import formOrganization from '@/components/FormOrganization.vue'
 import { mapActions } from 'vuex';
 import { ACTIONS } from '../store/actions-definitions';
 
