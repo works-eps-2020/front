@@ -49,7 +49,7 @@ export const mutations = {
       }
     }
   }`,
-  UPDATE_ORGANIZATION: `mutation ($description: String!, $id: String!, $name: String!) {
+  UPDATE_ORGANIZATION: `mutation ($description: String!, $id: uuid!, $name: String!) {
     update_organization(_set: {description: $description, name: $name}, where: {id: {_eq: $id}}) {
       returning {
         description

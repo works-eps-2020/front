@@ -26,7 +26,7 @@ export default new Vuex.Store<State>({
     levels: [],
     organizations: [],
     currentOrganization: {
-      id: "",
+      id: undefined,
       description: "",
       name:""
     },
@@ -179,7 +179,7 @@ export default new Vuex.Store<State>({
     async [ACTIONS.UPDATE_ORGANIZATION] (context) {
       if(context.state.token){
         const result = await fetchAsync(context.state.token, fetcher, mutations.UPDATE_ORGANIZATION, context.state.currentOrganization)
-        if(result.data && result.data.insert_organization.returning) {
+        if(result.data && result.data.update_organization.returning) {
           context.dispatch(ACTIONS.SET_CURRENT_ORGANIZATION, {})
           context.dispatch(ACTIONS.SET_ORGANIZATIONS)
           context.dispatch(ACTIONS.SET_SHOW_FORM_ORGANIZATION, false)

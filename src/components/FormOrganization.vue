@@ -60,8 +60,10 @@ export default {
       this.$refs.organization.validate().then(success => {
         if (success) {
           if(store.state.currentOrganization.id && store.state.currentOrganization.id.length > 0){
+            console.log('ici')
             store.dispatch(ACTIONS.UPDATE_ORGANIZATION)
           }else {
+            console.log('here')
             store.dispatch(ACTIONS.CREATE_ORGANIZATION)
           }
         }
