@@ -139,6 +139,7 @@ export default new Vuex.Store<State>({
       if(context.state.token){
         const result = await fetchAsync(context.state.token, fetcher, mutations.CREATE_ORGANIZATION, context.state.currentOrganization)
         if(result.data && result.data.insert_organization.returning) {
+          context.dispatch(ACTIONS.SET_CURRENT_ORGANIZATION, {})
           context.dispatch(ACTIONS.SET_ORGANIZATIONS)
           context.dispatch(ACTIONS.SET_SHOW_FORM_ORGANIZATION, false)
         }
@@ -146,6 +147,16 @@ export default new Vuex.Store<State>({
     },
     [ACTIONS.SET_SHOW_FORM_ORGANIZATION] (context, val) {
       context.commit(MUTATIONS.SET_SHOW_FORM_ORGANIZATION, val)
+    },
+    async [ACTIONS.UPDATE_ORGANIZATION] (context) {
+      if(context.state.token){
+        const result = await fetchAsync(context.state.token, fetcher, mutations.UPDATE_ORGANIZATION, context.state.currentOrganization)
+        if(result.data && result.data.insert_organization.returning) {
+          context.dispatch(ACTIONS.SET_CURRENT_ORGANIZATION, {})
+          context.dispatch(ACTIONS.SET_ORGANIZATIONS)
+          context.dispatch(ACTIONS.SET_SHOW_FORM_ORGANIZATION, false)
+        }
+      }
     }
   },
   modules: {}
