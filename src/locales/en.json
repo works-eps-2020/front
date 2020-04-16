@@ -16,6 +16,10 @@
   "submit": "Submit",
   "close": "Close",
   "max":"The field allow {max} caractere",
+<<<<<<< HEAD
+=======
+  "name": "Name",
+>>>>>>> add create orga
   "chat": "Chat | Chats",
   "message": "Message | Messages",
   "send_messages": "Send messages",
