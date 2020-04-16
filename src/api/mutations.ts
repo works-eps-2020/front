@@ -40,4 +40,13 @@ export const mutations = {
       }
     }
   }`,
+  CREATE_ORGANIZATION: `mutation ($description: String!, $name: String!) {
+    insert_organization(objects: {description: $description , name: $name}) {
+      returning {
+        description
+        id
+        name
+      }
+    }
+  }`
 };

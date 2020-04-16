@@ -25,6 +25,11 @@ export default new Vuex.Store<State>({
     token: "",
     levels: [],
     organizations: [],
+    currentOrganization: {
+      description: "",
+      name:""
+    },
+    showFormOrganization: false,
   },
   mutations: {
     [MUTATIONS.SET_PROFILE]: (state, payload: Profile) => {
@@ -44,6 +49,12 @@ export default new Vuex.Store<State>({
     },
     [MUTATIONS.REMOVE_ORGANIZATION]: (state, organization: Organization) => {
       state.organizations = state.organizations?.filter(item => item.id !== organization.id)
+    },
+    [MUTATIONS.SET_CURRENT_ORGANIZATION]: (state, organization: Organization) => {
+      state.currentOrganization = {...state.currentOrganization, ...organization }
+    },
+    [MUTATIONS.SET_SHOW_FORM_ORGANIZATION]: (state, val: boolean) => {
+      state.showFormOrganization = val
     }
   },
   actions: {
@@ -142,12 +153,26 @@ export default new Vuex.Store<State>({
     },
     async [ACTIONS.REMOVE_ORGANIZATION] (context, id: string) {
       if(context.state.token) {
-        console.log(id)
         const result = await fetchAsync(context.state.token, fetcher, mutations.DELETE_ORGANIZATION, id )
         if(result.data && result.data.delete_organization.returning) {
           context.commit(MUTATIONS.REMOVE_ORGANIZATION, result.data.delete_organization.returning[0])
         }
       }
+    },
+    [ACTIONS.SET_CURRENT_ORGANIZATION] (context, organization: Organization) {
+      context.commit(MUTATIONS.SET_CURRENT_ORGANIZATION, organization)
+    },
+    async [ACTIONS.CREATE_ORGANIZATION] (context) {
+      if(context.state.token){
+        const result = await fetchAsync(context.state.token, fetcher, mutations.CREATE_ORGANIZATION, context.state.currentOrganization)
+        if(result.data && result.data.insert_organization.returning) {
+          context.dispatch(ACTIONS.SET_ORGANIZATIONS)
+          context.dispatch(ACTIONS.SET_SHOW_FORM_ORGANIZATION, false)
+        }
+      }
+    },
+    [ACTIONS.SET_SHOW_FORM_ORGANIZATION] (context, val) {
+      context.commit(MUTATIONS.SET_SHOW_FORM_ORGANIZATION, val)
     }
   },
   modules: {}

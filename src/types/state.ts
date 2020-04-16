@@ -9,4 +9,6 @@ export type State = {
   levels?: Level[];
   chats?: Chat[];
   organizations?: Organization[];
+  currentOrganization?: Organization;
+  showFormOrganization: boolean;
 };

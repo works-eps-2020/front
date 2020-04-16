@@ -22,7 +22,7 @@ import store from '@/store'
 import { mapState, mapActions } from 'vuex'
 import { ACTIONS } from '@/store/actions-definitions'
 export default {
-name: 'OrganisationDataTable',
+  name: 'OrganisationDataTable',
   data() {
     return {
 			columns: [
