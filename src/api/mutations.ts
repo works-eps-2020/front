@@ -30,5 +30,14 @@ export const mutations = {
       }
     }
   }  
-  `
+  `,
+  DELETE_ORGANIZATION: `mutation ($id: uuid!){
+    delete_organization(where: {id: {_eq: $id}}) {
+      returning {
+        description
+        name
+        id
+      }
+    }
+  }`,
 };

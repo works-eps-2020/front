@@ -49,5 +49,12 @@ export const queries = {
       }
     }
   }  
-  `
+  `,
+  organizations: `query {
+    organization {
+      description
+      id
+      name
+    }
+  }`
 };

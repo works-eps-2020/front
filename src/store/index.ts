@@ -1,18 +1,19 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import { State } from "@/types/state";
-import { Profile } from "@/types/profile";
-import { fetchAsync, fetcher } from "@/api/fetchers";
-import { MUTATIONS } from "./mutations-definitions";
-import { ACTIONS } from "./actions-definitions";
-import { queries } from "@/api/queries";
+import { State } from '@/types/state';
+import { Profile } from '@/types/profile';
+import { fetchAsync, fetcher } from '@/api/fetchers';
+import { MUTATIONS } from './mutations-definitions';
+import { ACTIONS } from './actions-definitions';
+import { queries } from '@/api/queries';
+import { mutations } from '@/api/mutations'
 
 import { Chat } from "@/types/chat";
 import { Message } from "@/types/message";
 import { User } from "@/types/user";
 import { Level } from "@/types/Level";
-import { mutations } from "@/api/mutations";
+import { Organization } from '@/types/organization'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getInstance } = require("@/auth0");
@@ -22,7 +23,8 @@ Vue.use(Vuex);
 export default new Vuex.Store<State>({
   state: {
     token: "",
-    levels: []
+    levels: [],
+    organizations: [],
   },
   mutations: {
     [MUTATIONS.SET_PROFILE]: (state, payload: Profile) => {
@@ -36,6 +38,12 @@ export default new Vuex.Store<State>({
     },
     [MUTATIONS.SET_CHATS]: (state, chats: Chat[]) => {
       state.chats = chats;
+    },
+    [MUTATIONS.SET_ORGANIZATIONS]: (state, organizations: Organization[]) => {
+      state.organizations =  organizations;
+    },
+    [MUTATIONS.REMOVE_ORGANIZATION]: (state, organization: Organization) => {
+      state.organizations = state.organizations?.filter(item => item.id !== organization.id)
     }
   },
   actions: {
@@ -122,6 +130,23 @@ export default new Vuex.Store<State>({
             context.state.levels.filter((level: Level) => level.id !== id)
           );
         });
+      }
+    },
+    async [ACTIONS.SET_ORGANIZATIONS] (context) {
+      if (context.state.token) {
+        const result = await fetchAsync(context.state.token, fetcher, queries.organizations)
+        if(result.data && result.data.organization){
+          context.commit(MUTATIONS.SET_ORGANIZATIONS, result.data.organization);
+        }
+      }
+    },
+    async [ACTIONS.REMOVE_ORGANIZATION] (context, id: string) {
+      if(context.state.token) {
+        console.log(id)
+        const result = await fetchAsync(context.state.token, fetcher, mutations.DELETE_ORGANIZATION, id )
+        if(result.data && result.data.delete_organization.returning) {
+          context.commit(MUTATIONS.REMOVE_ORGANIZATION, result.data.delete_organization.returning[0])
+        }
       }
     }
   },

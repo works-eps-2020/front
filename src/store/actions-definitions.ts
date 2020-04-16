@@ -4,5 +4,7 @@ export const ACTIONS = {
   SET_TOKEN: "setToken",
   RETRIEVE_LEVELS: "retrieveLevels",
   CREATE_LEVEL: "createLevel",
-  DELETE_LEVEL: "deleteLevel"
+  DELETE_LEVEL: "deleteLevel",
+  SET_ORGANIZATIONS: 'setOrganizations',
+  REMOVE_ORGANIZATION: 'removeOrganization'
 };

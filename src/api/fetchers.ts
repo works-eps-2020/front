@@ -1,6 +1,6 @@
 const API_URL = 'https://hasura.k8s.d0do.fr/v1/graphql';
 
-export const fetcher = (token: string, query: string, variables: any) => fetch(API_URL, {
+export const fetcher = (token: string, query: string, variables?: any) => fetch(API_URL, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ export const fetcher = (token: string, query: string, variables: any) => fetch(A
   }),
 });
 
-export const fetchAsync = async (token: string, fetcher: any, query: string, variables: any) => {
+export const fetchAsync = async (token: string, fetcher: any, query: string, variables?: any) => {
   const response = await fetcher(token, query, variables);
   if (!response.ok) {
     throw response;
