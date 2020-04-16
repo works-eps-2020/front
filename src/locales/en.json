@@ -1,4 +1,9 @@
 {
+  "linked_topic": "Linked topic",
+  "name": "Name",
+  "delete": "Delete",
+  "level": "Level | levels",
+  "level_management": "Level management",
   "setting": "Setting | Settings",
   "home": "Home",
   "chat": "Chat | Chats",

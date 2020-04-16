@@ -1,31 +1,37 @@
-import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '@/views/Home.vue';
-import Chats from '@/views/Chats.vue';
+import Vue from "vue";
+import VueRouter, { RouteConfig } from "vue-router";
+import Home from "@/views/Home.vue";
+import Chats from "@/views/Chats.vue";
+import Level from "@/views/Level.vue";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/',
-    redirect: '/home'
+    path: "/",
+    redirect: "/home"
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: Home,
+    path: "/home",
+    name: "Home",
+    component: Home
   },
   {
-    path: '/chats',
-    name: 'Chats',
-    component: Chats,
+    path: "/chats",
+    name: "Chats",
+    component: Chats
   },
+  {
+    path: "/level",
+    name: "Cours",
+    component: Level
+  }
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

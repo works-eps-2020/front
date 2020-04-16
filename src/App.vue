@@ -13,9 +13,7 @@
             v-if="$auth.isAuthenticated"
           />
 
-          <q-toolbar-title>
-            School App
-          </q-toolbar-title>
+          <q-toolbar-title>School App</q-toolbar-title>
           <q-btn
             stretch
             flat
@@ -36,29 +34,22 @@
       >
         <q-list>
           <q-item-label header>Menu</q-item-label>
-          <q-item
-            v-for="(item, index) in items"
-            :key="index"
-            clickable
-            tag="a"
-            :to="item.to"
-          >
+          <q-item v-for="(item, index) in items" :key="index" clickable tag="a" :to="item.to">
             <q-item-section avatar>
               <q-icon :name="item.avatar" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>{{item.label}}</q-item-label>
-              <q-item-label caption>{{item.caption}}</q-item-label>
+              <q-item-label>{{ item.label }}</q-item-label>
+              <q-item-label caption>{{ item.caption }}</q-item-label>
             </q-item-section>
           </q-item>
           <div></div>
-          <q-expansion-item
-            v-if="$auth.isAuthenticated"
-          >
+          <q-expansion-item v-if="$auth.isAuthenticated">
             <template v-slot:header>
               <q-item-section avatar>
                 <q-avatar>
-                  <q-img :src="$auth.user.picture"
+                  <q-img
+                    :src="$auth.user.picture"
                     spinner-color="white"
                     width="50px"
                     style="border-radius: 50%;"
@@ -66,27 +57,17 @@
                 </q-avatar>
               </q-item-section>
 
-              <q-item-section>
-                {{$t('firstname')}}
-              </q-item-section>
+              <q-item-section>{{ $t("firstname") }}</q-item-section>
             </template>
 
             <q-card>
               <q-card-section>
                 <q-list>
-                  <q-item
-                    clickable
-                    @click="logout"
-                  >
-                    <q-item-label>{{$t('logout')}}</q-item-label>
+                  <q-item clickable @click="logout">
+                    <q-item-label>{{ $t("logout") }}</q-item-label>
                   </q-item>
-                <q-item
-                  clickable
-                  tag="a"
-                  target="_blank"
-                  href="/settings"
-                  >
-                    <q-item-label>{{$tc('setting', 2)}}</q-item-label>
+                  <q-item clickable tag="a" target="_blank" to="/settings">
+                    <q-item-label>{{ $tc("setting", 2) }}</q-item-label>
                   </q-item>
                 </q-list>
               </q-card-section>
@@ -96,40 +77,46 @@
       </q-drawer>
 
       <q-page-container>
-        <router-view :key="$route.fullPath"/>
+        <router-view :key="$route.fullPath" />
       </q-page-container>
     </q-layout>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import { ACTIONS } from './store/actions-definitions'
+import { mapActions } from "vuex";
+import { ACTIONS } from "./store/actions-definitions";
 
 export default {
-  name: 'LayoutDefault',
+  name: "LayoutDefault",
   data() {
     return {
       leftDrawerOpen: false,
       items: [
         {
-          label: this.$t('home'),
-          caption: '',
-          to: '/home',
-          avatar: 'home',
+          label: this.$t("home"),
+          caption: "",
+          to: "/home",
+          avatar: "home"
         },
         {
-          label: this.$tc('chat', 1),
-          caption: this.$t('send_messages'),
-          to: '/chats',
-          avatar: 'message',
+          label: this.$tc("chat", 1),
+          caption: this.$t("send_messages"),
+          to: "/chats",
+          avatar: "message"
         },
-      ],
+        {
+          label: this.$tc("level", 1),
+          caption: this.$t("level_management"),
+          to: "/level",
+          avatar: "level"
+        }
+      ]
     };
   },
   async mounted() {
     await this[ACTIONS.SET_TOKEN]();
-    this[ACTIONS.SET_CHATS]({id: this.$auth.user.sub})
+    this[ACTIONS.SET_CHATS]({ id: this.$auth.user.sub });
   },
   methods: {
     ...mapActions([ACTIONS.SET_TOKEN, ACTIONS.SET_CHATS]),
@@ -140,12 +127,11 @@ export default {
     // Log the user out
     logout() {
       this.$auth.logout({
-        returnTo: window.location.origin,
+        returnTo: window.location.origin
       });
     }
-  },
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

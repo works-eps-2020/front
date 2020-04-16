@@ -1,4 +1,9 @@
 {
+  "linked_topic": "Cours liés",
+  "name": "Nom",
+  "delete": "Supprimer",
+  "level": "Niveau | Niveaux",
+  "level_management": "Gestion des niveaux",
   "setting": "Paramètre | Paramètres",
   "home": "Accueil",
   "logout": "Déconnexion",
@@ -86,4 +91,3 @@
     ]
   }
 }
-  

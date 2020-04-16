@@ -8,6 +8,17 @@ export const queries = {
       displayname
     }
   }`,
+  levels: `{
+    level {
+      id
+      name
+      topics_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+  }`,
   chats: `query ($id: String!) {
     chat {
       group_picture
