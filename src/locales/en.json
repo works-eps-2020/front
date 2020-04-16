@@ -24,26 +24,17 @@
   "logout": "Logout",
   "login": "Login",
   "you": "You",
-  "research": "Research",
-  "likes": "Likes",
+  "send": "Envoyer",
+  "research": "Search",
   "view": "View the | View all",
-  "comment": "Comment | Comments",
   "ago": "{duration} ago",
   "day": "day | days",
   "month": "Month | Months",
   "hour": "Hour | Hours",
-  "add-comment": "Add a comment",
-  "post": "Post | Posts",
-  "create_post": "Create new post",
-  "follow": "Follow",
-  "follower": "Follower | Followers",
-  "following": "Following",
   "email": "Email Address",
   "firstname": "First Name",
   "lastname": "Last Name",
-  "tagname": "Tag Name",
   "profile_picture": "Profile Pricture",
-  "description": "Description",
   "save": "Save",
   "minute": "Minute | Minutes",
   "january": "January",
@@ -58,44 +49,9 @@
   "october": "October",
   "november": "November",
   "december": "December",
-  "bookmarked-msg": "Post was saved",
-  "skip": "Skip",
-  "finish": "Finish",
-  "security": "Security",
-  "hashtag": "Hashtag | Hashtags",
-  "unknown_user": "Unknown user",
-  "not_explicit": "Picture is explicit",
   "server_error": "Server has encountered error",
-  "publish": "Publish",
   "save_settings": {
     "server_error": "Error during save",
     "creation": "Save settings"
-  },
-  "new_post": {
-    "title": "New publication",
-    "creation": "Create a new publication",
-    "choose_a_file": "Choose a file",
-    "placeholder_description": "Say what you want",
-    "error": {
-      "no_image_selected": "Please select an image",
-      "bad_file_type": "Please select a valid image",
-      "bad_description": "Please add a description with at least 5 characters"
-    }
-  },
-  "onboarding": {
-    "security": ["Security at all levels", "We don't store your photos"],
-    "post": [
-      "Easily post your photos",
-      "All your followers will know",
-      "Enjoy all your followees' posts"
-    ],
-    "comment": [
-      "Make sure your followees know what you think about posts",
-      "Enjoy your followers' opinion"
-    ],
-    "hashtag": [
-      "Add hastags to your publications",
-      "Easily search for hastags you enjoy"
-    ]
   }
 }

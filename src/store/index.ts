@@ -10,8 +10,6 @@ import { queries } from '@/api/queries';
 import { mutations } from '@/api/mutations'
 
 import { Chat } from "@/types/chat";
-import { Message } from "@/types/message";
-import { User } from "@/types/user";
 import { Level } from "@/types/Level";
 import { Organization } from '@/types/organization'
 
@@ -73,9 +71,8 @@ export default new Vuex.Store<State>({
                 id: chat.id,
                 name: chat.name,
                 picture: chat.group_picture,
-                lastMessage: chat.chat_messages[0],
                 users: chat.chat_users,
-                messages: []
+                messages: chat.chat_messages
               }
             });
             context.commit(MUTATIONS.SET_CHATS, chatsAvailable);
@@ -89,19 +86,23 @@ export default new Vuex.Store<State>({
         instance.$watch("loading", (loading: any) => {
           if (loading === false && instance.isAuthenticated) {
             instance
-              .getIdTokenClaims()
-              .then((token: any) => {
-                setTimeout(() =>{
-                  context.commit(MUTATIONS.SET_TOKEN, token.__raw);
-                  resolve(token.__raw);
-                }, 2000);
-              })
-              .catch((error: any) => {
-                reject(error);
-              });
-            }
+            .getIdTokenClaims()
+            .then((token: any) => {
+              setTimeout(() =>{
+                context.commit(MUTATIONS.SET_TOKEN, token.__raw);
+                resolve(token.__raw);
+              }, 3000);
+            })
+            .catch((error: any) => {
+              reject(error);
+            });
+          }
         });
       });
+    },
+    [ACTIONS.ADD_MESSAGE](context, payload) {
+      if(context.state.token)
+        return fetchAsync(context.state.token, fetcher, mutations.INSERT_MESSAGE, payload)
     }
   },
   modules: {}

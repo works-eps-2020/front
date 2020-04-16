@@ -12,15 +12,38 @@
       >
         <q-item-section avatar>
           <q-img
+            :src="chat.users[0].user.logo_url"
+            v-if="chat.users.length==1"
+            spinner-color="blue"
+            width="50px"
+            style="border-radius: 50%;"
+          />
+          <q-img
             :src="chat.picture"
+            v-else
             spinner-color="blue"
             width="50px"
             style="border-radius: 50%;"
           />
         </q-item-section>
-        <q-item-section>
-          <q-item-label>{{ chat.name }}</q-item-label>
-          <q-item-label caption>{{ `${chat.lastMessage.userId==$auth.sub? $t('you') : chat.lastMessage.user.displayName}: ${chat.lastMessage.content}` }}</q-item-label>
+        <q-item-section
+          v-if="chat.users.length==1"
+        >
+          <q-item-label>{{ chat.users[0].user.displayname }}</q-item-label>
+          <q-item-label
+            caption
+            v-if="chat.messages.length > 0"
+          >
+          {{ `${chat.messages[chat.messages.length-1].id===$auth.sub? $t('you') : chat.messages[chat.messages.length-1].user.displayname}: ${chat.messages[chat.messages.length-1].content}` }}
+          </q-item-label>
+        </q-item-section>
+        <q-item-section
+          v-else
+        >
+          <q-item-label>{{ chat.displayname }}</q-item-label>
+          <q-item-label caption
+            v-if="chat.messages.length > 0"
+          >{{ `${chat.messages[chat.messages.length-1].id===$auth.sub? $t('you') : chat.messages[chat.messages.length-1].user.displayname}: ${chat.messages[chat.messages.length-1].content}` }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
@@ -33,14 +56,7 @@ import { mapState } from 'vuex';
 export default {
   name: 'Chats',
   computed: {
-    ...mapState({
-      chats(state) {
-        return state.chats;
-      },
-      token(state) {
-        return state.token;
-      },
-    }),
+    ...mapState(['chats', 'token'])
   }
 };
 </script>

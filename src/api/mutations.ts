@@ -60,5 +60,31 @@ export const mutations = {
       }
     }
   }
-  `
+  `,
+  INSERT_MESSAGE: `mutation ($content: String!, $chatId: uuid!) {
+    insert_chat_message(objects: {content: $content, chat_id: $chatId}) {
+      affected_rows
+    }
+  }
+  `,
+  LAST_SEEN: `mutation ($id: String!){
+    update_user(_set: {last_seen: "now()"}, where: {id: {_eq: $id}}) {
+      affected_rows
+    }
+  }
+  `,
+  IS_TYPING: `mutation ($userId: Int) {
+    update_user (
+      _set: {
+        last_typed: "now()"
+      }
+      where: {
+        id: {
+          _eq: $userId
+        }
+      }
+    ) {
+      affected_rows
+    }
+  }`
 };

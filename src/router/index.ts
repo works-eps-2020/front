@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Home from "@/views/Home.vue";
 import Chats from "@/views/Chats.vue";
 import Level from "@/views/Level.vue";
+import Chat from '@/views/Chat.vue';
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes: Array<RouteConfig> = [
     path: '/',
     redirect: 'Home',
   },
+  {
+    path: '/chat/:chat_id',
+    name: 'Chat',
+    component: Chat
+  }
 ];
 
 const router = new VueRouter({

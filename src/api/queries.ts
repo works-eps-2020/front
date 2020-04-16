@@ -24,21 +24,24 @@ export const queries = {
       group_picture
       id
       name
-      chat_messages(limit: 1, order_by: {created_at: desc}) {
+      chat_messages(limit: 20, order_by: {created_at: asc}) {
         content
         created_at
         id
         user {
+          id
           firstname
           lastname
           displayname
           email
+          logo_url
         }
       }
       chat_users(where: {user: {id: {_neq: $id}}}) {
         user {
           displayname
           logo_url
+          id
           firstname
           email
           lastname
