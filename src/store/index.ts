@@ -25,10 +25,7 @@ export default new Vuex.Store<State>({
     chats: [],
     organizations: [],
     currentOrganization: {
-<<<<<<< HEAD
       id: undefined,
-=======
->>>>>>> add create orga
       description: "",
       name:""
     },

@@ -16,10 +16,6 @@
   "close": "Fermer",
   "required": "Obligatoire",
   "max":"Le champ n'accepte que {max}",
-<<<<<<< HEAD
-=======
-  "name": "Nom",
->>>>>>> add create orga
   "logout": "Déconnexion",
   "login": "Connexion",
   "chat": "Conversation | Conversations",
