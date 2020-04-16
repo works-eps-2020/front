@@ -2,9 +2,6 @@ export const mutations = {
   CREATE_LEVEL: `mutation ($name: String!) {
     insert_level(objects: {name: $name}) {
       returning {
-        displayname
-        email
-        firstname
         id
         name
       }
