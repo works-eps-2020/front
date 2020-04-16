@@ -30,5 +30,33 @@ export const mutations = {
       }
     }
   }  
+  `,
+  DELETE_ORGANIZATION: `mutation ($id: uuid!){
+    delete_organization(where: {id: {_eq: $id}}) {
+      returning {
+        description
+        name
+        id
+      }
+    }
+  }`,
+  CREATE_ORGANIZATION: `mutation ($description: String!, $name: String!) {
+    insert_organization(objects: {description: $description , name: $name}) {
+      returning {
+        description
+        id
+        name
+      }
+    }
+  }`,
+  UPDATE_ORGANIZATION: `mutation ($description: String!, $id: uuid!, $name: String!) {
+    update_organization(_set: {description: $description, name: $name}, where: {id: {_eq: $id}}) {
+      returning {
+        description
+        name
+        id
+      }
+    }
+  }
   `
 };

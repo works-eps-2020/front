@@ -43,7 +43,6 @@
               <q-item-label caption>{{ item.caption }}</q-item-label>
             </q-item-section>
           </q-item>
-          <div></div>
           <q-expansion-item v-if="$auth.isAuthenticated">
             <template v-slot:header>
               <q-item-section avatar>
@@ -77,7 +76,7 @@
       </q-drawer>
 
       <q-page-container>
-        <router-view :key="$route.fullPath" />
+        <router-view />
       </q-page-container>
     </q-layout>
   </div>
@@ -110,8 +109,14 @@ export default {
           caption: this.$t("level_management"),
           to: "/level",
           avatar: "level"
-        }
-      ]
+        },
+        {
+          label: this.$tc('organization', 0),
+          caption: this.$tc('organization', 0),
+          to: '/organizations',
+          avatar: 'business_center',
+        },
+      ],
     };
   },
   async mounted() {
