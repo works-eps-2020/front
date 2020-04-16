@@ -2,11 +2,14 @@ export const mutations = {
   CREATE_LEVEL: `mutation ($name: String!) {
     insert_level(objects: {name: $name}) {
       returning {
+        displayname
+        email
+        firstname
         id
         name
       }
     }
-  }
+  }  
   `,
   DELETE_LEVEL: `mutation ($id: uuid!) {
     delete_level(where: {id: {_eq: $id}}) {
@@ -19,7 +22,6 @@ export const mutations = {
   INSERT_USER: `mutation ($displayname: String!, $email: String!, $firstname: String!, $lastname: String!, $logo_url: String!) {
     insert_user(objects: {displayname: $displayname, email: $email, firstname: $firstname, lastname: $lastname, logo_url: $logo_url}) {
       returning {
-        auth0_id
         displayname
         email
         firstname
@@ -58,5 +60,31 @@ export const mutations = {
       }
     }
   }
-  `
+  `,
+  INSERT_MESSAGE: `mutation ($content: String!, $chatId: uuid!) {
+    insert_chat_message(objects: {content: $content, chat_id: $chatId}) {
+      affected_rows
+    }
+  }
+  `,
+  LAST_SEEN: `mutation ($id: String!){
+    update_user(_set: {last_seen: "now()"}, where: {id: {_eq: $id}}) {
+      affected_rows
+    }
+  }
+  `,
+  IS_TYPING: `mutation ($userId: Int) {
+    update_user (
+      _set: {
+        last_typed: "now()"
+      }
+      where: {
+        id: {
+          _eq: $userId
+        }
+      }
+    ) {
+      affected_rows
+    }
+  }`
 };

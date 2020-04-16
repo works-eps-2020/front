@@ -2,6 +2,7 @@ export const ACTIONS = {
   SET_PROFILE: "setProfile",
   SET_CHATS: "setChats",
   SET_TOKEN: "setToken",
+  ADD_MESSAGE: 'addMessage',
   RETRIEVE_LEVELS: "retrieveLevels",
   CREATE_LEVEL: "createLevel",
   DELETE_LEVEL: "deleteLevel",

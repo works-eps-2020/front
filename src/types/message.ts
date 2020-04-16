@@ -5,5 +5,4 @@ export type Message = {
   content: string;
   user: User;
   created_at: Date;
-  status: string;
 }

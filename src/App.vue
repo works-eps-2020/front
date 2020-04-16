@@ -34,7 +34,13 @@
       >
         <q-list>
           <q-item-label header>Menu</q-item-label>
-          <q-item v-for="(item, index) in items" :key="index" clickable tag="a" :to="item.to">
+          <q-item
+            v-for="(item, index) in items"
+            :key="index"
+            clickable
+            tag="a"
+            :to="item.to"
+          >
             <q-item-section avatar>
               <q-icon :name="item.avatar" />
             </q-item-section>
@@ -83,8 +89,12 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { ACTIONS } from "./store/actions-definitions";
+import { mapActions, mapState } from 'vuex';
+import { ACTIONS } from './store/actions-definitions'
+
+import { Loading } from 'quasar'
+import { fetchAsync, fetcher } from './api/fetchers';
+import { mutations } from '@/api/mutations';
 
 export default {
   name: "LayoutDefault",
@@ -118,10 +128,13 @@ export default {
         },
       ],
     };
+ },
+  mounted() {
+    Loading.show()
+    this[ACTIONS.SET_TOKEN]()
   },
-  async mounted() {
-    await this[ACTIONS.SET_TOKEN]();
-    this[ACTIONS.SET_CHATS]({ id: this.$auth.user.sub });
+  computed: {
+    ...mapState(['token', 'chats'])
   },
   methods: {
     ...mapActions([ACTIONS.SET_TOKEN, ACTIONS.SET_CHATS]),
@@ -134,6 +147,17 @@ export default {
       this.$auth.logout({
         returnTo: window.location.origin
       });
+    }
+  },
+  watch: {
+    token(newValue) {
+      this[ACTIONS.SET_CHATS]({id: this.$auth.user.sub})
+      Loading.hide()
+      const _token = this.token
+      const _userId = this.$auth.user.sub
+      setInterval(function () {
+        fetchAsync(_token, fetcher, mutations.LAST_SEEN, {id: _userId})
+      }, 5000*60);
     }
   }
 };
