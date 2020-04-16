@@ -13,9 +13,7 @@
             v-if="$auth.isAuthenticated"
           />
 
-          <q-toolbar-title>
-            School App
-          </q-toolbar-title>
+          <q-toolbar-title>School App</q-toolbar-title>
           <q-btn
             stretch
             flat
@@ -36,7 +34,7 @@
       >
         <q-list>
           <q-item-label header>Menu</q-item-label>
-          <q-item v-for="(item, index) in items" :key="index" clickable tag="a" :to="item.href">
+          <q-item v-for="(item, index) in items" :key="index" clickable tag="a" :to="item.to">
             <q-item-section avatar>
               <q-icon :name="item.avatar" />
             </q-item-section>
@@ -59,9 +57,7 @@
                 </q-avatar>
               </q-item-section>
 
-              <q-item-section>
-                {{ $t("firstname") }}
-              </q-item-section>
+              <q-item-section>{{ $t("firstname") }}</q-item-section>
             </template>
 
             <q-card>
@@ -90,7 +86,6 @@
 <script>
 import { mapActions } from "vuex";
 import { ACTIONS } from "./store/actions-definitions";
-import { getInstance } from "@/auth0";
 
 export default {
   name: "LayoutDefault",
@@ -101,29 +96,30 @@ export default {
         {
           label: this.$t("home"),
           caption: "",
-          href: "/",
+          to: "/home",
           avatar: "home"
         },
         {
           label: this.$tc("chat", 1),
           caption: this.$t("send_messages"),
-          href: "/messages",
+          to: "/chats",
           avatar: "message"
         },
         {
           label: this.$tc("level", 1),
           caption: this.$t("level_management"),
-          href: "/level",
+          to: "/level",
           avatar: "level"
         }
       ]
     };
   },
-  mounted() {
-    this[ACTIONS.SET_TOKEN]();
+  async mounted() {
+    await this[ACTIONS.SET_TOKEN]();
+    this[ACTIONS.SET_CHATS]({ id: this.$auth.user.sub });
   },
   methods: {
-    ...mapActions([ACTIONS.SET_TOKEN]),
+    ...mapActions([ACTIONS.SET_TOKEN, ACTIONS.SET_CHATS]),
     // Log the user in
     login() {
       this.$auth.loginWithRedirect();

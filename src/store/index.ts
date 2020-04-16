@@ -6,9 +6,14 @@ import { Profile } from "@/types/profile";
 import { fetchAsync, fetcher } from "@/api/fetchers";
 import { MUTATIONS } from "./mutations-definitions";
 import { ACTIONS } from "./actions-definitions";
-import { Level } from "@/types/Level";
 import { queries } from "@/api/queries";
+
+import { Chat } from "@/types/chat";
+import { Message } from "@/types/message";
+import { User } from "@/types/user";
+import { Level } from "@/types/Level";
 import { mutations } from "@/api/mutations";
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getInstance } = require("@/auth0");
 
@@ -28,18 +33,33 @@ export default new Vuex.Store<State>({
     },
     [MUTATIONS.MUTATE_LEVEL]: (state, levels: Level[]) => {
       state.levels = levels;
+    },
+    [MUTATIONS.SET_CHATS]: (state, chats: Chat[]) => {
+      state.chats = chats;
     }
   },
   actions: {
     [ACTIONS.SET_PROFILE]: (context, payload: Profile) => {
       context.commit(MUTATIONS.SET_PROFILE, payload);
     },
-    async [ACTIONS.SET_CHATS](context) {
-      console.log(this);
-      /* const chats =  await fetchAsync(
-        $auth.
-      )
-      context.commit(MUTATIONS.SET_CHATS, chats); */
+    [ACTIONS.SET_CHATS](context: any, payload: any) {
+      if (context.state.token) {
+        fetchAsync(context.state.token, fetcher, queries.chats, { id: payload.id }).then(chats => {
+          if (chats.data) {
+            const chatsAvailable: Chat[] = chats.data.chat.map((chat: any) => {
+              return {
+                id: chat.id,
+                name: chat.name,
+                picture: chat.group_picture,
+                lastMessage: chat.chat_messages[0],
+                users: chat.chat_users,
+                messages: []
+              };
+            });
+            context.commit(MUTATIONS.SET_CHATS, chatsAvailable);
+          }
+        });
+      }
     },
     [ACTIONS.SET_TOKEN](context) {
       return new Promise((resolve, reject) => {

@@ -1,9 +1,7 @@
 import { Role } from './role';
+import { User } from './user';
 
 export type Profile = {
-  id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
+  user: User;
   roles: Role[];
 }

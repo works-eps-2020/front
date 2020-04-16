@@ -1,21 +1,25 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "@/views/Home.vue";
+import Chats from "@/views/Chats.vue";
 import Level from "@/views/Level.vue";
-import Messages from "@/views/Messages.vue";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
     path: "/",
+    redirect: "/home"
+  },
+  {
+    path: "/home",
     name: "Home",
     component: Home
   },
   {
-    path: "/messages",
-    name: "Messages",
-    component: Messages
+    path: "/chats",
+    name: "Chats",
+    component: Chats
   },
   {
     path: "/level",
