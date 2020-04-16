@@ -9,5 +9,6 @@ export const ACTIONS = {
   REMOVE_ORGANIZATION: 'removeOrganization',
   SET_CURRENT_ORGANIZATION: 'setCurrentOrganization',
   CREATE_ORGANIZATION: 'createOrganization',
-  SET_SHOW_FORM_ORGANIZATION: 'setShowFormOrganization'
+  SET_SHOW_FORM_ORGANIZATION: 'setShowFormOrganization',
+  UPDATE_ORGANIZATION: 'updateOrganization'
 };

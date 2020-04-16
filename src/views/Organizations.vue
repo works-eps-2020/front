@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <formOrganization/>
+    <formOrganization />
     <div class="row justify-center q-pa-sm">
       <q-btn class="row center" label="Nouvelle organisation" color="primary" @click="setShowFormOrganization(true)"/>
     </div>

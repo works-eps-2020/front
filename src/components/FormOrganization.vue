@@ -59,7 +59,11 @@ export default {
     onSubmit() {
       this.$refs.organization.validate().then(success => {
         if (success) {
-          store.dispatch(ACTIONS.CREATE_ORGANIZATION)
+          if(store.state.currentOrganization.id && store.state.currentOrganization.id.length > 0){
+            store.dispatch(ACTIONS.UPDATE_ORGANIZATION)
+          }else {
+            store.dispatch(ACTIONS.CREATE_ORGANIZATION)
+          }
         }
       })
     },

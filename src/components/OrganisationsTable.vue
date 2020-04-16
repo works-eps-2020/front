@@ -9,7 +9,7 @@
       <template v-slot:body-cell-update="props">
         <q-td :props="props">
           <div class="q-pa-md q-gutter-sm">
-            <q-btn round color='yellow' icon='create' />
+            <q-btn round color='yellow' icon='create' @click="updateOrganization(props.row)"/>
             <q-btn round color='red' icon='delete' @click="removeOrganizationById(props.row.id)"/>
           </div>
         </q-td>
@@ -49,6 +49,10 @@ export default {
     ...mapActions([ACTIONS.SET_ORGANIZATIONS], [ACTIONS.REMOVE_ORGANIZATION]),
     removeOrganizationById(id){
       store.dispatch(ACTIONS.REMOVE_ORGANIZATION, {id})
+    },
+    updateOrganization(organization) {
+      store.dispatch(ACTIONS.SET_CURRENT_ORGANIZATION, organization)
+      store.dispatch(ACTIONS.SET_SHOW_FORM_ORGANIZATION, true)
     }
 	},
 	async mounted() {
