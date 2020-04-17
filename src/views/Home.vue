@@ -1,24 +1,19 @@
 <template>
-  <div class="home">
-    <HomeLogin
-      v-if="!$auth.isAuthenticated"
-      msg="Welcome to Your Vue.js App"
-    />
-    <HomeLogged
-      v-else
-    />
+  <div class="q-pa-md">
+    <h5>Vos cours</h5>
+    <carrousel-lessons />
+    <h5>Cours intéressants</h5>
+    <carrousel-lessons />
   </div>
 </template>
 
 <script>
-import HomeLogin from '@/components/HomeLogin.vue';
-import HomeLogged from '@/components/HomeLogged.vue';
+import CarrouselLessons from '@/components/CarrouselsLessons.vue'
 
 export default {
   name: 'Home',
   components: {
-    HomeLogin,
-    HomeLogged,
-  },
+    CarrouselLessons,
+  }
 };
 </script>
