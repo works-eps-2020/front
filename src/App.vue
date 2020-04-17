@@ -14,15 +14,7 @@
           />
 
           <q-toolbar-title>School App</q-toolbar-title>
-          <q-btn
-            flat
-            dense
-            round
-            @click="leftDrawerOpen = !leftDrawerOpen"
-            aria-label="Menu"
-            icon="menu"
-            v-if="$auth.isAuthenticated"
-          />
+
           <q-btn
             stretch
             flat
