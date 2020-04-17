@@ -24,7 +24,7 @@ export const queries = {
       group_picture
       id
       name
-      chat_messages(limit: 20, order_by: {created_at: asc}) {
+      chat_messages(limit: 20, order_by: {created_at: desc}) {
         content
         created_at
         id

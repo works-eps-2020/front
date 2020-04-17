@@ -11,14 +11,14 @@
 					navigation
 					padding
 					arrows
-					autoplay
+
 					infinite
 					height="300px"
 					class="bg-grey-1 shadow-2 rounded-borders"
 				>
 					<q-carousel-slide :name="i" v-for="i in 4" :key="i" class="column no-wrap">
 						<div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-							<card-lessons v-for="i in 2" :key="i" />
+							<card-lessons v-for="i in 2" :key="i"/>
 						</div>
 					</q-carousel-slide>
 				</q-carousel>

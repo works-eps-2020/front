@@ -20,7 +20,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store<State>({
   state: {
-    token: "",
+    token: undefined,
     levels: [],
     chats: [],
     organizations: [],
@@ -72,7 +72,7 @@ export default new Vuex.Store<State>({
                 name: chat.name,
                 picture: chat.group_picture,
                 users: chat.chat_users,
-                messages: chat.chat_messages
+                messages: chat.chat_messages.reverse()
               }
             });
             context.commit(MUTATIONS.SET_CHATS, chatsAvailable);
@@ -151,7 +151,9 @@ export default new Vuex.Store<State>({
     },
     async [ACTIONS.SET_ORGANIZATIONS] (context) {
       if (context.state.token) {
+        console.log('here')
         const result = await fetchAsync(context.state.token, fetcher, queries.organizations)
+        console.log('ici')
         if(result.data && result.data.organization){
           context.commit(MUTATIONS.SET_ORGANIZATIONS, result.data.organization);
         }

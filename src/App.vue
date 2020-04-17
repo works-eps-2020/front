@@ -34,13 +34,7 @@
       >
         <q-list>
           <q-item-label header>Menu</q-item-label>
-          <q-item
-            v-for="(item, index) in items"
-            :key="index"
-            clickable
-            tag="a"
-            :to="item.to"
-          >
+          <q-item v-for="(item, index) in items" :key="index" clickable tag="a" :to="item.to">
             <q-item-section avatar>
               <q-icon :name="item.avatar" />
             </q-item-section>
@@ -89,12 +83,15 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import { ACTIONS } from './store/actions-definitions'
+import { mapActions, mapState } from "vuex";
+import { ACTIONS } from "./store/actions-definitions";
 
-import { Loading } from 'quasar'
-import { fetchAsync, fetcher } from './api/fetchers';
-import { mutations } from '@/api/mutations';
+import { Loading } from "quasar";
+import { fetchAsync, fetcher } from "./api/fetchers";
+import { mutations } from "@/api/mutations";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { getInstance } = require("@/auth0");
 
 export default {
   name: "LayoutDefault",
@@ -121,22 +118,24 @@ export default {
           avatar: "level"
         },
         {
-          label: this.$tc('organization', 0),
-          caption: this.$tc('organization', 0),
-          to: '/organizations',
-          avatar: 'business_center',
-        },
-      ],
+          label: this.$tc("organization", 0),
+          caption: this.$tc("organization", 0),
+          to: "/organizations",
+          avatar: "business_center"
+        }
+      ]
     };
- },
-  async mounted() {
-    if(this.$auth.isAuthenticated) {
-      Loading.show()
-      await this[ACTIONS.SET_TOKEN]()
-    }
+  },
+  mounted() {
+    getInstance().$watch("isAuthenticated", isAuthenticated => {
+      if (isAuthenticated) {
+        Loading.show();
+        this[ACTIONS.SET_TOKEN]();
+      }
+    });
   },
   computed: {
-    ...mapState(['token', 'chats'])
+    ...mapState(["token", "chats"])
   },
   methods: {
     ...mapActions([ACTIONS.SET_TOKEN, ACTIONS.SET_CHATS]),
@@ -153,13 +152,13 @@ export default {
   },
   watch: {
     token(newValue) {
-      this[ACTIONS.SET_CHATS]({id: this.$auth.user.sub})
-      Loading.hide()
-      const _token = this.token
-      const _userId = this.$auth.user.sub
-      setInterval(function () {
-        fetchAsync(_token, fetcher, mutations.LAST_SEEN, {id: _userId})
-      }, 5000*60);
+      this[ACTIONS.SET_CHATS]({ id: this.$auth.user.sub });
+      Loading.hide();
+      const _token = this.token;
+      const _userId = this.$auth.user.sub;
+      setInterval(function() {
+        fetchAsync(_token, fetcher, mutations.LAST_SEEN, { id: _userId });
+      }, 5000 * 60);
     }
   }
 };
