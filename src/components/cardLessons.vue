@@ -1,5 +1,5 @@
 <template>
-<q-card class="q-pa-sm my-card col-6" flat bordered>
+  <q-card v-bind:class="{'my-card col-6': $q.platform.is.desktop}" class="q-pa-sm" flat bordered>
       <q-card-section horizontal>
         <q-card-section class="q-pt-xs">
           <div class="text-h5 q-mt-sm q-mb-xs">{{ title }}</div>
