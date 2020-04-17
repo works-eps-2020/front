@@ -126,9 +126,15 @@ export default new Vuex.Store<State>({
     },
     [ACTIONS.CREATE_LEVEL](context: any, name: string) {
       if (context.state.token) {
-        fetchAsync(context.state.token, fetcher, mutations.CREATE_LEVEL, {
-          name
-        }).then(responsePayload => {
+        fetchAsync(
+          context.state.token,
+          fetcher,
+          mutations.CREATE_LEVEL,
+          {
+            name
+          },
+          { "x-hasura-role": "staff" }
+        ).then(responsePayload => {
           if (responsePayload.data) {
             const newLevel = {
               id: responsePayload.data.insert_level.returning[0].id,
@@ -143,9 +149,15 @@ export default new Vuex.Store<State>({
     },
     [ACTIONS.DELETE_LEVEL](context: any, id: string) {
       if (context.state.token) {
-        fetchAsync(context.state.token, fetcher, mutations.DELETE_LEVEL, {
-          id
-        }).then(() => {
+        fetchAsync(
+          context.state.token,
+          fetcher,
+          mutations.DELETE_LEVEL,
+          {
+            id
+          },
+          { "x-hasura-role": "staff" }
+        ).then(() => {
           context.commit(
             MUTATIONS.MUTATE_LEVEL,
             context.state.levels.filter((level: Level) => level.id !== id)
@@ -234,11 +246,17 @@ export default new Vuex.Store<State>({
     },
     [ACTIONS.CREATE_TOPIC](context: any, topic: Topic) {
       if (context.state.token) {
-        fetchAsync(context.state.token, fetcher, mutations.CREATE_TOPIC, {
-          name: topic.name,
-          description: topic.description,
-          levelId: topic.level.id
-        }).then(responsePayload => {
+        fetchAsync(
+          context.state.token,
+          fetcher,
+          mutations.CREATE_TOPIC,
+          {
+            name: topic.name,
+            description: topic.description,
+            levelId: topic.level.id
+          },
+          { "x-hasura-role": "staff" }
+        ).then(responsePayload => {
           if (responsePayload.data) {
             const newTopic = {
               id: responsePayload.data.insert_topic.returning[0].id,
@@ -258,9 +276,15 @@ export default new Vuex.Store<State>({
     },
     [ACTIONS.DELETE_TOPIC](context: any, id: string) {
       if (context.state.token) {
-        fetchAsync(context.state.token, fetcher, mutations.DELETE_TOPIC, {
-          id
-        }).then(() => {
+        fetchAsync(
+          context.state.token,
+          fetcher,
+          mutations.DELETE_TOPIC,
+          {
+            id
+          },
+          { "x-hasura-role": "staff" }
+        ).then(() => {
           context.commit(
             MUTATIONS.MUTATE_TOPIC,
             context.state.topics.filter((topic: Topic) => topic.id !== id)
