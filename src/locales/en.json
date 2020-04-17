@@ -1,4 +1,6 @@
 {
+  "topic": "Topic | Topics",
+  "topic_management": "Topic management",
   "linked_topic": "Linked topic",
   "name": "Name",
   "delete": "Delete",
@@ -17,7 +19,7 @@
   "required": "Required",
   "submit": "Submit",
   "close": "Close",
-  "max":"The field allow {max} caractere",
+  "max": "The field allow {max} caractere",
   "chat": "Chat | Chats",
   "message": "Message | Messages",
   "send_messages": "Send messages",

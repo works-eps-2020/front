@@ -3,19 +3,20 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Home from "@/views/Home.vue";
 import Chats from "@/views/Chats.vue";
 import Level from "@/views/Level.vue";
-import Chat from '@/views/Chat.vue';
+import Chat from "@/views/Chat.vue";
+import Topic from "@/views/Topic.vue";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/',
-    redirect: '/home'
+    path: "/",
+    redirect: "/home"
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: Home,
+    path: "/home",
+    name: "Home",
+    component: Home
   },
   {
     path: "/chats",
@@ -28,22 +29,27 @@ const routes: Array<RouteConfig> = [
     component: Level
   },
   {
-    path: '/organizations/:id',
-    name: 'organization',
-    component: () => import(/* webpackChunkName: "organization" */ '../views/Organization.vue'),
+    path: "/topic",
+    name: "Matière",
+    component: Topic
   },
   {
-    path: '/organizations',
-    name: 'organizations',
-    component: () => import(/* webpackChunkName: "organization" */ '../views/Organizations.vue'),
+    path: "/organizations/:id",
+    name: "organization",
+    component: () => import(/* webpackChunkName: "organization" */ "../views/Organization.vue")
   },
   {
-    path: '/',
-    redirect: 'Home',
+    path: "/organizations",
+    name: "organizations",
+    component: () => import(/* webpackChunkName: "organization" */ "../views/Organizations.vue")
   },
   {
-    path: '/chat/:chat_id',
-    name: 'Chat',
+    path: "/",
+    redirect: "Home"
+  },
+  {
+    path: "/chat/:chat_id",
+    name: "Chat",
     component: Chat
   }
 ];

@@ -1,4 +1,6 @@
 {
+  "topic": "Matière | Matières",
+  "topic_management": "Gestion des matières",
   "linked_topic": "Cours liés",
   "name": "Nom",
   "delete": "Supprimer",
@@ -17,7 +19,7 @@
   "submit": "Valider",
   "close": "Fermer",
   "required": "Obligatoire",
-  "max":"Le champ n'accepte que {max}",
+  "max": "Le champ n'accepte que {max}",
   "logout": "Déconnexion",
   "login": "Connexion",
   "chat": "Conversation | Conversations",

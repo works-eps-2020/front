@@ -116,7 +116,13 @@ export default {
           label: this.$tc("level", 1),
           caption: this.$t("level_management"),
           to: "/level",
-          avatar: "level"
+          avatar: "poll"
+        },
+        {
+          label: this.$tc("topic", 1),
+          caption: this.$t("topic_management"),
+          to: "/topic",
+          avatar: "school"
         },
         {
           label: this.$tc("organization", 0),

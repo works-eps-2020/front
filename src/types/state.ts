@@ -1,7 +1,8 @@
 import { Level } from "./Level";
-import { Profile } from './profile';
-import { Chat } from './chat';
-import { Organization } from './organization'
+import { Profile } from "./profile";
+import { Chat } from "./chat";
+import { Organization } from "./organization";
+import { Topic } from "./Topic";
 
 export type State = {
   profile?: Profile;
@@ -11,4 +12,5 @@ export type State = {
   organizations?: Organization[];
   currentOrganization?: Organization;
   showFormOrganization: boolean;
+  topics?: Topic[];
 };
