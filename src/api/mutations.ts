@@ -97,6 +97,27 @@ export const mutations = {
         chat_id
       }
     }
-  }
+  }`,
+  CREATE_TOPIC: `mutation ($name: String!, $description: String!, $levelId: uuid!) {
+    insert_topic(objects: {name: $name, description: $description, level_id: $levelId}) {
+      returning {
+        name
+        id
+        description
+        level {
+          id
+          name
+        }
+      }
+    }
+  }  
+  `,
+  DELETE_TOPIC: `mutation ($id: uuid!) {
+    delete_topic(where: {id: {_eq: $id}}) {
+      returning {
+        id
+      }
+    }
+  }  
   `
 };

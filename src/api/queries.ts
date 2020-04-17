@@ -19,6 +19,16 @@ export const queries = {
       }
     }
   }`,
+  topics: `{
+    topic {
+      id
+      name
+      description
+      level {
+        name
+      }
+    }
+  }`,
   chats: `query ($id: String!) {
     chat {
       group_picture
