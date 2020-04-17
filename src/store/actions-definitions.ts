@@ -15,5 +15,5 @@ export const ACTIONS = {
   RETRIEVE_TOPICS: "retrieveTopic",
   CREATE_TOPIC: "createTopic",
   DELETE_TOPIC: "deleteTopic",
-  GET_MY_TOPICS: 'getMyTopics',
+  GET_MY_TOPICS: "getMyTopics"
 };
