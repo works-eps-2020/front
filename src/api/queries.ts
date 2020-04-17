@@ -73,5 +73,16 @@ export const queries = {
       displayname
     }
   }
-  `
+  `,
+  myTopic: `{
+    topic {
+      name
+      id
+      level {
+        name
+        user_levels(where: {user_id: {_eq: $id}})
+        id
+      }
+    }
+  }`
 };

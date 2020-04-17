@@ -1,14 +1,14 @@
 <template>
-<q-card class="q-pa-sm" flat bordered>
+<q-card class="q-pa-sm my-card col-6" flat bordered>
       <q-card-section horizontal>
         <q-card-section class="q-pt-xs">
-          <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
+          <div class="text-h5 q-mt-sm q-mb-xs">{{ title }}</div>
           <div class="text-caption text-grey">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            {{ description }}
           </div>
         </q-card-section>
 
-        <q-card-section class="col-5 flex flex-center">
+        <q-card-section v-if="$q.platform.is.desktop" class="col-5 flex flex-center">
           <q-img
             class="rounded-borders"
             src="https://cdn.quasar.dev/img/parallax2.jpg"
@@ -19,12 +19,11 @@
       <q-separator />
 
       <q-card-actions>
-        <q-btn flat round icon="event" />
         <q-btn flat>
           7:30PM
         </q-btn>
-        <q-btn flat color="primary">
-          Reserve
+        <q-btn flat :color="isReserved ? 'primary' : 'secondary'">
+          {{ isReserved ? $t('lessons_unreserve') : $t('lessons_reserve') }}
         </q-btn>
       </q-card-actions>
     </q-card>
@@ -37,6 +36,22 @@ export default {
 		return {
 			stars: 4
 		}
+	},
+	props: {
+		title: String,
+		description: String,
+		isReserved: {
+			type: Boolean,
+			default: false
+			},
 	}
 };
 </script>
+
+<style lang="sass" scoped>
+.my-card
+	max-height: 300px
+  width: 100%
+  max-width: 350px
+</style>
+

@@ -14,5 +14,6 @@ export const ACTIONS = {
   UPDATE_ORGANIZATION: "updateOrganization",
   RETRIEVE_TOPICS: "retrieveTopic",
   CREATE_TOPIC: "createTopic",
-  DELETE_TOPIC: "deleteTopic"
+  DELETE_TOPIC: "deleteTopic",
+  GET_MY_TOPICS: 'getMyTopics',
 };

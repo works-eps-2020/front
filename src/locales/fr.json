@@ -16,6 +16,8 @@
   "form_organization_name_hint": "Nom de l'organisation",
   "form_organization_description_label": "Description de l'organisation *",
   "form_organization_description_hint": "Description de l'organisation",
+  "lessons_reserve": "S'inscrire",
+  "lessons_unreserve": "Se desinscrire",
   "submit": "Valider",
   "close": "Fermer",
   "required": "Obligatoire",

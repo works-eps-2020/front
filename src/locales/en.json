@@ -16,6 +16,8 @@
   "form_organization_name_hint": "Organization's name",
   "form_organization_description_label": "Organization's description *",
   "form_organization_description_hint": "Organization's description",
+  "lessons_reserve": "Reserve",
+  "lessons_unreserve": "Unreserve",
   "required": "Required",
   "submit": "Submit",
   "close": "Close",
