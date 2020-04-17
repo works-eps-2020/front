@@ -83,5 +83,20 @@ export const mutations = {
     ) {
       affected_rows
     }
-  }`
+  }`,
+  CREATE_CHAT: `mutation ($groupPicture: String!, $name: String!) {
+    insert_chat(objects: {group_picture: $groupPicture, name: $name}) {
+      returning {
+        id
+      }
+    }
+  }`,
+  ADD_TO_CHAT: `mutation ($userId: String!, $chatId: uuid!) {
+    insert_chat_user(objects: {chat_id: $chatId, user_id: $userId}) {
+      returning {
+        chat_id
+      }
+    }
+  }
+  `
 };

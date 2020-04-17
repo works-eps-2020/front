@@ -6,6 +6,8 @@
   "level_management": "Level management",
   "setting": "Setting | Settings",
   "home": "Home",
+  "user": "User",
+  "url_picture": "URL of group picture",
   "organization": "Organization | Organizations",
   "update": "Update",
   "form_organization_name_label": "Organization's name *",

@@ -15,6 +15,15 @@
 
           <q-toolbar-title>School App</q-toolbar-title>
           <q-btn
+            flat
+            dense
+            round
+            @click="leftDrawerOpen = !leftDrawerOpen"
+            aria-label="Menu"
+            icon="menu"
+            v-if="$auth.isAuthenticated"
+          />
+          <q-btn
             stretch
             flat
             v-if="!$auth.isAuthenticated"
@@ -157,8 +166,9 @@ export default {
       const _token = this.token;
       const _userId = this.$auth.user.sub;
       setInterval(function() {
+        console.log('coucou')
         fetchAsync(_token, fetcher, mutations.LAST_SEEN, { id: _userId });
-      }, 5000 * 60);
+      }, 10000);
     }
   }
 };

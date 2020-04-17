@@ -7,7 +7,8 @@
       <q-item
         clickable
         v-ripple
-        :to="`/chat/${chat.id}`"
+        :href="`/chat/${chat.id}`"
+        tag="a"
         class="rounded-borders"
       >
         <q-item-section avatar>
@@ -47,14 +48,24 @@
         </q-item-section>
       </q-item>
     </q-list>
+    <FormChat />
   </div>
 </template>
 
 <script>
+import FormChat from "@/components/FormChat";
 import { mapState } from 'vuex';
 
 export default {
   name: 'Chats',
+  data(){
+    return {
+      visibleChat: false,
+    }
+  },
+  components: {
+    FormChat
+  },
   computed: {
     ...mapState(['chats', 'token'])
   }

@@ -8,6 +8,8 @@
   "home": "Accueil",
   "organization": "Organisation | Organisations",
   "update": "Modifier",
+  "user": "Utilisateur",
+  "url_picture": "URL de la photo de group",
   "form_organization_name_label": "Nom de l'organisation *",
   "form_organization_name_hint": "Nom de l'organisation",
   "form_organization_description_label": "Description de l'organisation *",

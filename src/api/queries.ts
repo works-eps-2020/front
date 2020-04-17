@@ -56,5 +56,12 @@ export const queries = {
       id
       name
     }
-  }`
+  }`,
+  getUserLike: `query ($name: String!) {
+    user(where: {displayname: {_ilike: $name}}) {
+      id
+      displayname
+    }
+  }
+  `
 };
