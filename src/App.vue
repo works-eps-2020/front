@@ -129,9 +129,11 @@ export default {
       ],
     };
  },
-  mounted() {
-    Loading.show()
-    this[ACTIONS.SET_TOKEN]()
+  async mounted() {
+    if(this.$auth.isAuthenticated) {
+      Loading.show()
+      await this[ACTIONS.SET_TOKEN]()
+    }
   },
   computed: {
     ...mapState(['token', 'chats'])
