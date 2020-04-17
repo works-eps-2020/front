@@ -1,5 +1,5 @@
 <template>
-<q-card class="my-card" flat bordered>
+<q-card class="q-pa-sm" flat bordered>
       <q-card-section horizontal>
         <q-card-section class="q-pt-xs">
           <div class="text-h5 q-mt-sm q-mb-xs">Title</div>

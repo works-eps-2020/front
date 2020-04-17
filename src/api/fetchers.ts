@@ -19,7 +19,7 @@ export const fetchAsync = async (token: string, fetcher: any, query: string, var
     throw response;
   }
   try {
-    return await response.json();
+    return response.json();
   } catch (err) {
     console.error('Error parsing JSON', err);
   }
