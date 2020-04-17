@@ -2,7 +2,7 @@ import { Level } from "./Level";
 import { Profile } from "./profile";
 import { Chat } from "./chat";
 import { Organization } from "./organization";
-import { Topic } from "./Topic";
+import { Topic } from "./topic";
 
 export type State = {
   profile?: Profile;

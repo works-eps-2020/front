@@ -12,7 +12,7 @@ import { mutations } from "@/api/mutations";
 import { Chat } from "@/types/chat";
 import { Level } from "@/types/Level";
 import { Organization } from "@/types/organization";
-import { Topic } from "@/types/Topic";
+import { Topic } from "@/types/topic";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getInstance } = require("@/auth0");
